@@ -6,6 +6,8 @@ package com.furusystems;
  */
 class Color3
 {
+	static inline var inv:Float = 1.0 / 255.0;
+	
 	var data:Array<Float>;
 	
 	public var r(get, set):Float;
@@ -30,9 +32,9 @@ class Color3
 	}
 	
 	public inline function setFromHex(color:Int):Color3 {
-		r = (color >> 16) / 255;
-		g = (color >> 8 & 0xFF) / 255;
-		b = (color & 0xFF) / 255;
+		r = (color >> 16) * inv;
+		g = (color >> 8 & 0xFF) * inv;
+		b = (color & 0xFF) * inv;
 		return this;
 	}
 	public inline function toHex():Int {
@@ -56,9 +58,9 @@ class Color3
 	
 	public static inline function fromHex(color:Int):Color3 {
 		var c = new Color3();
-		c.r = (color >> 16) / 255;
-		c.g = (color >> 8 & 0xFF) / 255;
-		c.b = (color & 0xFF) / 255;
+		c.r = (color >> 16) * inv;
+		c.g = (color >> 8 & 0xFF) * inv;
+		c.b = (color & 0xFF) * inv;
 		return c;
 	}
 	public static inline function fromColor4(color:Color4):Color3 {

@@ -4,9 +4,12 @@ package com.furusystems;
  * ...
  * @author Andreas Rønning
  */
+
 class Color4
 {
 	var data:Array<Float>;
+	
+	static inline var inv:Float = 1.0 / 255.0;
 	
 	public var r(get, set):Float;
 	public var g(get, set):Float;
@@ -28,10 +31,10 @@ class Color4
 		data = [r, g, b, a];
 	}
 	public inline function setFromHex(color:Int):Color4 {
-		a = (color >> 24) / 255;
-		r = (color >> 16 & 0xFF) / 255;
-		g = (color >>  8 & 0xFF) / 255;
-		b = (color & 0xFF) / 255;
+		a = (color >> 24 & 0xFF) * inv;
+		r = (color >> 16 & 0xFF) * inv;
+		g = (color >>  8 & 0xFF) * inv;
+		b = (color & 0xFF) * inv;
 		return this;
 	}
 	public inline function toHex():Int {
@@ -63,10 +66,10 @@ class Color4
 	
 	public static function fromHex(color:Int):Color4 {
 		var c = new Color4();
-		c.a = (color >> 24) / 255;
-		c.r = (color >> 16 & 0xFF) / 255;
-		c.g = (color >>  8 & 0xFF) / 255;
-		c.b = (color & 0xFF) / 255;
+		c.a = (color >> 24 & 0xFF) * inv;
+		c.r = (color >> 16 & 0xFF) * inv;
+		c.g = (color >>  8 & 0xFF) * inv;
+		c.b = (color & 0xFF) * inv;
 		return c;
 	}
 	public static function fromColor3(color:Color3):Color4 {
